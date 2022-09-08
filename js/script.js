@@ -80,5 +80,44 @@ const makeGuess = function (guess) {
    } else {
     guessedLettersArray.push(guess);
     console.log(guessedLettersArray);
+    playerGuesses();
+    guessProgress(guessedLettersArray);
    }
+};
+
+//this function will update the page with the letters the player guesses.
+const playerGuesses = function () {
+    //clearing the list first
+    guessedLetters.innerHTML = "";
+    //Create a new list item for each letter inside your guessedLetters array (i.e., the global variable) and add it to the unordered list.
+    for (const letter of guessedLettersArray) {
+        const li = document.createElement("li");
+        li.innerText = letter;
+        guessedLetters.append(li);
+    }
+};
+
+//this function updates the word in progress, and will replace the circle symbols with any correct guesses.
+const guessProgress = function (guessedLettersArray) {
+    const wordUpper = word.toUpperCase();
+    const wordArray = wordUpper.split("");
+    const revealWord = [];
+
+    for (const letter of wordArray) {
+        if (guessedLettersArray.includes(letter)) {
+            revealWord.push(letter.toUpperCase());
+        } else {
+            revealWord.push("●");
+        }
+    }
+    wordInProgress.innerText = revealWord.join("");
+    winCheck();
+};
+
+//this function checks if the player successfully guessed the word and won the game
+const winCheck = function () {
+    if (wordInProgress.innerText === word.toUpperCase()) {
+        message.classList.add("win");
+        message.innerHTML = "<p class='highlight'>You guessed correct the word! Congrats!</p>";
+    }
 };
