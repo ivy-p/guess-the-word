@@ -151,7 +151,6 @@ const winCheck = function () {
     }
 };
 
-// this function resets the site format when the "play again" button is clicked
 const startOver = function () {
     guessButton.classList.add("hide");
     remaining.classList.add("hide");
@@ -159,6 +158,7 @@ const startOver = function () {
     playAgainButton.classList.remove("hide");
 };
 
+// this function resets the site format when the "play again" button is clicked
 playAgainButton.addEventListener("click", function() {
     message.classList.remove("win");
     guessedLettersArray = [];
@@ -166,10 +166,12 @@ playAgainButton.addEventListener("click", function() {
     remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
     guessedLetters.innerHTML = "";
     message.innerText = "";
+
     getWord();
+    
     guessButton.classList.remove("hide");
     playAgainButton.classList.add("hide");
-    remainingGuesses.classList.remove("hide");
+    remaining.classList.remove("hide");
     guessedLetters.classList.remove("hide");
 });
 
